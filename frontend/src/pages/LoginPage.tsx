@@ -15,10 +15,14 @@ export const LoginPage: React.FC = () => {
     setError(null)
 
     try {
+      const params = new URLSearchParams()
+      params.append('username', username)
+      params.append('password', password)
+
       const res = await fetch('/api/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params,
       })
 
       if (!res.ok) {
