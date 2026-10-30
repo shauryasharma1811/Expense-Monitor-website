@@ -60,8 +60,22 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
+import uuid
+from app.core.database import SessionLocal
+from app.models.models import RevokedToken
+
 def revoke_token(token: str) -> None:
     revoked_tokens.add(token)
+    db = SessionLocal()
+    try:
+        if not db.query(RevokedToken).filter(RevokedToken.token == token).first():
+            rev = RevokedToken(id=str(uuid.uuid4()), token=token)
+            db.add(rev)
+            db.commit()
+    except Exception:
+        db.rollback()
+    finally:
+        db.close()
 
 def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
     credentials_exception = HTTPException(
@@ -71,6 +85,20 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
     )
     if token in revoked_tokens:
         raise credentials_exception
+
+    db = SessionLocal()
+    try:
+        is_revoked = db.query(RevokedToken).filter(RevokedToken.token == token).first()
+        if is_revoked:
+            revoked_tokens.add(token)
+            raise credentials_exception
+    except HTTPException:
+        raise
+    except Exception:
+        pass
+    finally:
+        db.close()
+
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         username: str = payload.get("sub")

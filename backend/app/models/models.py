@@ -33,3 +33,10 @@ class Expense(Base):
     currency = Column(String, default="USD")
     status = Column(String, default="completed")
     updated_at = Column(DateTime(timezone=True), onupdate=func.now(), server_default=func.now())
+
+class RevokedToken(Base):
+    __tablename__ = "revoked_tokens"
+
+    id = Column(String, primary_key=True, index=True)
+    token = Column(Text, unique=True, index=True, nullable=False)
+    revoked_at = Column(DateTime(timezone=True), server_default=func.now())
