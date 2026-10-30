@@ -5,6 +5,7 @@ from app.core.database import get_db
 from app.models.models import User, Expense
 from app.models.schemas import UserLogin, TokenResponse, ExpensesResponse, SyncStatusInfo, RefreshResponse
 from app.auth.auth import verify_password, create_access_token, get_current_user
+from app.core.config import Settings
 
 router = APIRouter()
 
@@ -71,7 +72,8 @@ async def get_expenses(
 
     total = query.count()
 
-    if total == 0 and not search and not category and not date_from and not date_to:
+    settings = Settings()
+    if total == 0 and settings.ENVIRONMENT.lower() != "production" and not search and not category and not date_from and not date_to:
         sample_records = [
             Expense(id="1", user_id="1", sheet_row_id="TXN-001", date="2026-10-25", description="AWS Cloud Hosting", category="Infrastructure", amount=1250.00, currency="USD", status="completed"),
             Expense(id="2", user_id="1", sheet_row_id="TXN-002", date="2026-10-28", description="Office Supplies", category="Operations", amount=340.50, currency="USD", status="completed")
