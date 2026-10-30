@@ -10,7 +10,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'AWS Cloud Hosting Services',
     category: 'Infrastructure',
     amount: 1450.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -20,7 +20,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Datadog Monitoring License',
     category: 'Software',
     amount: 320.5,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -30,7 +30,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Office Supplies & Equipment',
     category: 'Operations',
     amount: 185.2,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -40,7 +40,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Google Workspace Subscriptions',
     category: 'Software',
     amount: 720.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -50,7 +50,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Client Lunch Meeting - Q3 Review',
     category: 'Meals & Entertainment',
     amount: 95.4,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -60,7 +60,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'GitHub Enterprise Team Plan',
     category: 'Software',
     amount: 210.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -70,7 +70,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Figma Enterprise Design Seats',
     category: 'Software',
     amount: 150.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -80,7 +80,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Conference Travel & Lodging',
     category: 'Travel',
     amount: 890.75,
-    currency: 'USD',
+    currency: 'INR',
     status: 'pending',
   },
   {
@@ -90,7 +90,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Ergonomic Standing Desks',
     category: 'Operations',
     amount: 1200.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -100,7 +100,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Slack Enterprise Grid License',
     category: 'Software',
     amount: 450.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -110,7 +110,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Uber Business Ground Transportation',
     category: 'Travel',
     amount: 45.6,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -120,7 +120,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Security Audit & Pen Testing',
     category: 'Legal & Professional',
     amount: 3500.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -130,7 +130,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Internet Fiber Dedicated Connection',
     category: 'Infrastructure',
     amount: 250.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -140,7 +140,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Team Dinner Celebration',
     category: 'Meals & Entertainment',
     amount: 340.5,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -150,7 +150,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Quarterly Accounting Audit Services',
     category: 'Legal & Professional',
     amount: 1800.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -160,7 +160,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Stripe Payment Processing Fees',
     category: 'Operations',
     amount: 112.4,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -170,7 +170,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Zoom Enterprise Video Conference',
     category: 'Software',
     amount: 199.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -180,7 +180,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Airport Parking & Tolls',
     category: 'Travel',
     amount: 68.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -190,7 +190,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Postgres Managed Database Cluster',
     category: 'Infrastructure',
     amount: 540.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -200,7 +200,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Notion Team Workspace Subscription',
     category: 'Software',
     amount: 120.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -210,7 +210,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: 'Hardware Key Fobs for 2FA',
     category: 'Operations',
     amount: 290.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
   {
@@ -220,7 +220,7 @@ export const MOCK_EXPENSES: ExpenseRecord[] = [
     description: '1Password Team Passwords Vault',
     category: 'Software',
     amount: 80.0,
-    currency: 'USD',
+    currency: 'INR',
     status: 'completed',
   },
 ]

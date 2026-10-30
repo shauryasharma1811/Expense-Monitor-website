@@ -75,8 +75,8 @@ async def get_expenses(
     settings = Settings()
     if total == 0 and settings.ENVIRONMENT.lower() != "production" and not search and not category and not date_from and not date_to:
         sample_records = [
-            Expense(id="1", user_id="1", sheet_row_id="TXN-001", date="2026-10-25", description="AWS Cloud Hosting", category="Infrastructure", amount=1250.00, currency="USD", status="completed"),
-            Expense(id="2", user_id="1", sheet_row_id="TXN-002", date="2026-10-28", description="Office Supplies", category="Operations", amount=340.50, currency="USD", status="completed")
+            Expense(id="1", user_id="1", sheet_row_id="TXN-001", date="2026-10-25", description="AWS Cloud Hosting", category="Infrastructure", amount=1250.00, currency="INR", status="completed"),
+            Expense(id="2", user_id="1", sheet_row_id="TXN-002", date="2026-10-28", description="Office Supplies", category="Operations", amount=340.50, currency="INR", status="completed")
         ]
         for r in sample_records:
             try:
