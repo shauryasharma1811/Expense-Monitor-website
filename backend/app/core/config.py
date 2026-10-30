@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     ENCRYPTION_KEY: str = "test-encryption-key-32-bytes-long-string=="
+    GOOGLE_CLIENT_ID: str = "placeholder-google-client-id.apps.googleusercontent.com"
+    GOOGLE_CLIENT_SECRET: str = "placeholder-google-client-secret"
 
     @model_validator(mode="after")
     def validate_production_secrets(self) -> "Settings":

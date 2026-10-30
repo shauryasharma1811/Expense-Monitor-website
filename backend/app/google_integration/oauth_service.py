@@ -11,9 +11,9 @@ from app.models.models import SheetConfig
 
 settings = Settings()
 
-# Placeholder client credentials — never use real secrets
-CLIENT_ID = "placeholder-google-client-id.apps.googleusercontent.com"
-CLIENT_SECRET = "placeholder-google-client-secret"
+# Read real credentials from environment / settings when available
+CLIENT_ID = getattr(settings, "GOOGLE_CLIENT_ID", "placeholder-google-client-id.apps.googleusercontent.com")
+CLIENT_SECRET = getattr(settings, "GOOGLE_CLIENT_SECRET", "placeholder-google-client-secret")
 
 # Minimal scopes for spreadsheet access
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly",
