@@ -7,6 +7,9 @@ import { Pagination } from '../components/Pagination'
 import { LoadingState } from '../components/LoadingState'
 import { EmptyState } from '../components/EmptyState'
 import { ErrorState } from '../components/ErrorState'
+import { SyncStatus } from '../components/SyncStatus'
+
+const PAGE_SIZE = 20
 
 export function DashboardPage() {
   const [records, setRecords] = useState<ExpenseRecord[]>([])
@@ -15,6 +18,7 @@ export function DashboardPage() {
 
   // Filters and state
   const [search, setSearch] = useState('')
+  const [category, setCategory] = useState('')
   const [dateFrom, setDateFrom] = useState('')
   const [dateTo, setDateTo] = useState('')
   const [sortBy, setSortBy] = useState<'date' | 'amount'>('date')
@@ -29,22 +33,27 @@ export function DashboardPage() {
     try {
       const response = await fetchExpenses(
         page,
-        15,
+        PAGE_SIZE,
         search || undefined,
         dateFrom || undefined,
         dateTo || undefined,
         sortBy,
-        sortOrder
+        sortOrder,
+        category || undefined
       )
       setRecords(response.data)
       setTotalPages(response.totalPages)
       setTotalCount(response.total)
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'An unexpected error occurred while fetching expense records.')
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'An unexpected error occurred while fetching expense records.'
+      )
     } finally {
       setLoading(false)
     }
-  }, [page, search, dateFrom, dateTo, sortBy, sortOrder])
+  }, [page, search, category, dateFrom, dateTo, sortBy, sortOrder])
 
   useEffect(() => {
     loadData()
@@ -62,6 +71,7 @@ export function DashboardPage() {
 
   const handleClearFilters = () => {
     setSearch('')
+    setCategory('')
     setDateFrom('')
     setDateTo('')
     setPage(1)
@@ -73,10 +83,11 @@ export function DashboardPage() {
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-slate-900">Expenses</h2>
           <p className="text-sm text-slate-500 mt-1">
-            Real-time synchronization with primary financial accounts.
+            Read-only monitoring synchronized with primary accounts.
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3">
+          <SyncStatus />
           <span className="text-xs font-medium px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">
             Total records: {totalCount}
           </span>
@@ -85,10 +96,15 @@ export function DashboardPage() {
 
       <ExpenseFilters
         search={search}
+        category={category}
         dateFrom={dateFrom}
         dateTo={dateTo}
         onSearchChange={(v) => {
           setSearch(v)
+          setPage(1)
+        }}
+        onCategoryChange={(v) => {
+          setCategory(v)
           setPage(1)
         }}
         onDateFromChange={(v) => {

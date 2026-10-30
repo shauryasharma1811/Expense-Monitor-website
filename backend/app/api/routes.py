@@ -69,10 +69,3 @@ async def get_sync_status(
 ):
     return {"status": "connected", "lastSync": "2026-10-30T10:00:00Z", "message": "Successfully synced with Google Sheets"}
 
-@router.get("/auth/oauth/google")
-async def google_oauth_redirect():
-    return {"auth_url": "https://accounts.google.com/o/oauth2/auth?client_id=placeholder"}
-
-@router.get("/auth/oauth/google/callback")
-async def google_oauth_callback(code: str):
-    return {"token": "sample-oauth-token", "sheet_id": "sample-sheet-id"}
