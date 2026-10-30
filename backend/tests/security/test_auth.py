@@ -30,7 +30,7 @@ def test_login_success():
 
 def test_login_failure():
     response = client.post("/api/auth/login", data={"username": "bankemployee", "password": "wrongpassword"})
-    assert response.status_code == 400
+    assert response.status_code == 401
 
 def test_missing_token_access():
     # Access protected endpoint without token should return 401
@@ -53,7 +53,7 @@ def test_rate_limit_enforcement():
     # 5 allowed attempts with wrong password should pass as 400, 6th should be 429
     for i in range(5):
         r = client.post("/api/auth/login", data={"username": "bankemployee", "password": "bad"})
-        assert r.status_code == 400
+        assert r.status_code == 401
     # 6th attempt should hit rate limit
     r = client.post("/api/auth/login", data={"username": "bankemployee", "password": "bad"})
     assert r.status_code == 429

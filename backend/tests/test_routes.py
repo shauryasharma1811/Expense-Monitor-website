@@ -30,7 +30,16 @@ def test_login_success():
 
 def test_login_failure():
     response = client.post("/api/auth/login", data={"username": "bankemployee", "password": "wrongpassword"})
-    assert response.status_code == 400
+    assert response.status_code == 401
+
+def test_login_json_success():
+    response = client.post("/api/auth/login", json={"username": "bankemployee", "password": "securepassword"})
+    assert response.status_code == 200
+    assert "token" in response.json()
+
+def test_login_json_failure():
+    response = client.post("/api/auth/login", json={"username": "bankemployee", "password": "wrongpassword"})
+    assert response.status_code == 401
 
 def test_get_expenses_unauthorized():
     response = client.get("/api/expenses")
