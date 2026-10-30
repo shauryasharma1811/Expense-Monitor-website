@@ -6,18 +6,39 @@ export const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setError(null)
 
-    // In production with FastAPI backend, this issues an authentic session cookie / token.
-    // Client-side navigation is decoupled from real authorization to comply with security rules.
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      })
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(
+          body.detail || `Login failed (${res.status}): bad password or network failure.`
+        )
+      }
+
+      const data = await res.json()
+      localStorage.setItem('isAuthenticated', 'true')
+      localStorage.setItem('token', data.access_token || data.token || '')
+      navigate('/dashboard', { replace: true })
+    } catch (err: unknown) {
+      setError(
+        err instanceof Error ? err.message : 'Network failure. Please try again.'
+      )
+    } finally {
       setLoading(false)
-      navigate('/dashboard')
-    }, 400)
+    }
   }
 
   return (
@@ -33,12 +54,13 @@ export const LoginPage: React.FC = () => {
 
         <form onSubmit={handleLogin} className="p-8 space-y-5">
           <div className="space-y-1">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <label htmlFor="username" className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
               Corporate Identity
             </label>
             <div className="relative">
               <User className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
               <input
+                id="username"
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -50,12 +72,13 @@ export const LoginPage: React.FC = () => {
           </div>
 
           <div className="space-y-1">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <label htmlFor="password" className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
               Access Token / Password
             </label>
             <div className="relative">
               <Lock className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
               <input
+                id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -65,6 +88,12 @@ export const LoginPage: React.FC = () => {
               />
             </div>
           </div>
+
+          {error && (
+            <div className="rounded-lg bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700">
+              {error}
+            </div>
+          )}
 
           <button
             type="submit"
